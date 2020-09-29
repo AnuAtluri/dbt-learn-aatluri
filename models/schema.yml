@@ -1,5 +1,16 @@
 version: 2
 
+sources:
+  - name: jaffle_shop
+    database: raw
+    tables:
+      - name: orders
+      - name: customers
+  - name: stripe
+    database: raw
+    tables:
+      - name: payment
+  
 models:
   - name: customers
     columns:
@@ -31,3 +42,9 @@ models:
           - relationships:
               to: ref('stg_customers')
               field: customer_id
+  - name: orders
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
